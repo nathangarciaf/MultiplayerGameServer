@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibir/Esconder Texto</title>
+    <script>
+        function toggleText() {
+            var texto = document.getElementById("texto");
+            if (texto.style.display === "none") {
+                texto.style.display = "block";
+            } else {
+                texto.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Exemplo de Exibir/Esconder Texto</h1>
+    <p id="texto" style="display:none;">
+        Este é um texto que pode ser mostrado ou ocultado ao clicar no botão abaixo.
+    </p>
+    <button onclick="toggleText()">Mostrar/Esconder Texto</button>
+
+</body>
+</html>
