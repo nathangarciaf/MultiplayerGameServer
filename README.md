@@ -14,18 +14,17 @@ Jogadores podem sair a qualquer momento, sem que interfira na ordem de jogadas.
 
 Requisitos: Python 3 instalado na máquina
 
-Instruções:
-
-Clone ou baixe o repositório. De preferência, clone o reposótio com o seguinte comando:
+Clone ou baixe o repositório. De preferência, clone o repositóriocom o seguinte comando:
 ```
 git clone https://github.com/nathangarciaf/MultiplayerGameServer
 ```
 
-Execute o servidor com o comando:
+Execute o servidor com o comando, caso esteja no windows:
 ```
 python game.py
 ```
-Caso esteja no windows, porém caso esteja usando Linux, pode ser que tenha que executar o comando:
+
+Porém caso esteja usando Linux, pode ser que tenha que executar o comando:
 ```
 python game.py
 ```
@@ -34,18 +33,12 @@ para executar o servidor.
 
 Para testar, abra um terminal para cada jogador e conecte-se usando Telnet:
 ```
-
 telnet 127.0.0.1 65432
 ```
 
 Envie palpites no formato:
 ```
 POST <numero>
-```
-
-Exemplo:
-```
-POST 10
 ```
 Para sair do jogo, digite:
 ```
@@ -63,5 +56,3 @@ Select: Utilizado para monitorar conexões ativas e tratar comunicação eficien
 Gerenciamento de turnos: Mantemos uma lista de jogadores para garantir a ordem correta dos turnos.
 
 Recuperação de saída de jogadores: Se um jogador sai, o turno passa para o próximo automaticamente.
-
-Este projeto proporciona uma experiência multiplayer simples via terminal, ilustrando conceitos de redes e sincronização entre clientes.
