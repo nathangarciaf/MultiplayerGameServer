@@ -42,6 +42,9 @@ Envie palpites no formato:
 ```
 POST <numero>
 ```
+Caso estejam incorretos, espere sua rodada novamente ou espere um novo jogo caso
+algum de seus adversários ganhe o jogo.
+
 Para sair do jogo, digite:
 ```
 sair

@@ -60,18 +60,12 @@ def handle_client(client_socket, client_address, user_name):
                 
                 if clients:
                     client_names = list(clients.values())
-                    print(client_names)
-                    print("NOME DO USUÁRIO EM QUESTÃO: " + user_name)
-                    print()
                     if user_name in client_names:
                         player_index = client_names.index(user_name)
-                        print("IDX DO USUÁRIO EM QUESTÃO: " + player_index)
                         if player_index == current_turn_index:
                             current_turn_index = current_turn_index % (len(client_names) - 1) if len(client_names) > 1 else 0
                     
-                    print(current_turn_index)
                     next_player = list(clients.keys())[current_turn_index]
-                    print(next_player)
                     next_player.sendall("Sua rodada. Jogue\n".encode())
                     broadcast(f'Rodada de usuário {clients[next_player]}', next_player)
                 return
@@ -118,7 +112,7 @@ def start_server():
     
     sockets_list.append(server_socket)
 
-    print(f'Servidor do Jogo iniciado. Escutando em {HOST}:{PORT}. Número secreto sorteado.')
+    print(f'Servidor do Jogo iniciado. Escutando em {HOST}:{PORT}. Número secreto sorteado: {secret_number}')
 
     while True:
         read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
