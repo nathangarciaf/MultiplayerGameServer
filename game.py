@@ -4,9 +4,10 @@ import threading
 import random
 
 # Configurações do servidor
-HOST = '172.20.72.77'  # Endereço IP do servidor (localhost)
+#HOST = '172.20.72.77'  # Endereço IP do servidor (localhost)
+HOST = '127.0.0.1'
 PORT = 1234             # Porta que o servidor vai escutar
-MAX_CLIENTS = 4         # Número máximo de clientes simultâneos 
+MAX_CLIENTS = 8         # Número máximo de clientes simultâneos 
 
 # Lista de clientes conectados
 clients = {}

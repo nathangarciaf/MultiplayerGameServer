@@ -35,7 +35,7 @@ para executar o servidor.
 ### Como testar 
 Para testar, abra um terminal para cada jogador e conecte-se usando Telnet:
 ```
-telnet 127.0.0.1 65432
+telnet 127.0.0.1 1234
 ```
 
 Envie palpites no formato:
@@ -69,3 +69,8 @@ e também dos jogadores que estão jogando o jogo.
 
 Correção de pequenos bugs: Tive alguns problemas em questões envolvendo sair no meio do jogo fora da rodada,
 e também problema com retornos ao servidor após sair do jogo uma vez
+
+Multiplas Salas: Mais de uma sala possível para ser jogada o jogo.
+
+Permitir maior quantidade de usuários: Atualmente o código está com o número limitado de usuários. A ideia
+seria adicionar usuários de maneira dinâmica.
