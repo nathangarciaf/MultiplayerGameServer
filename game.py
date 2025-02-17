@@ -6,7 +6,7 @@ import random
 # Configurações do servidor
 HOST = '172.20.72.77'  # Endereço IP do servidor (localhost)
 PORT = 1234             # Porta que o servidor vai escutar
-MAX_CLIENTS = 6         # Número máximo de clientes simultâneos 
+MAX_CLIENTS = 4         # Número máximo de clientes simultâneos 
 
 # Lista de clientes conectados
 clients = {}
@@ -66,42 +66,7 @@ def handle_client(client_socket, client_address, user_name):
             
             if message_decoded.lower() == 'sair':
                 print(f'Usuário {user_name} saiu do jogo.')
-                client_socket.close()
-                if client_socket in sockets_list:
-                    sockets_list.remove(client_socket)
-                if client_socket in clients:
-                    del clients[client_socket]
-                
-                if clients:
-                    client_names = list(clients.values())
-                    if user_name in client_names:
-                        player_index = client_names.index(user_namedef handle_client(client_socket, client_address, user_name):
-    global secret_number, current_turn_index
-    print(f'Iniciando processamento para {client_address} como usuário {user_name}')
-    
-    # Enviar para o jogador seu nome e instruções
-    client_socket.sendall(f"Seja bem-vindo ao Jogo, usuário {user_name}\nDê palpite do número entre 1 e 20\n\n".encode())
-    send_commands(client_socket)  # Enviar a lista de comandos
-    
-    if len(clients) == 1:
-        client_socket.sendall("Sua rodada. Jogue\n".encode())
-    else:
-        current_player = list(clients.values())[current_turn_index]
-        client_socket.sendall(f'Rodada de usuário {current_player}\n'.encode())
-    
-    got_list_request = False  # Flag para controlar se o jogador pediu a lista
-
-    while True:
-        try:
-            message = client_socket.recv(1024)
-            if not message:
-                break
-            
-            message_decoded = message.decode('utf-8').strip()
-            print(f'Recebido de usuário {user_name}: {message_decoded}')
-            
-            if message_decoded.lower() == 'sair':
-                print(f'Usuário {user_name} saiu do jogo.')
+                # Fechar a conexão do cliente imediatamente
                 client_socket.close()
                 if client_socket in sockets_list:
                     sockets_list.remove(client_socket)
@@ -113,19 +78,13 @@ def handle_client(client_socket, client_address, user_name):
                     if user_name in client_names:
                         player_index = client_names.index(user_name)
                         if player_index == current_turn_index:
-                            # Se o jogador que saiu era o da vez, passa para o próximo
-                            if len(client_names) > 1:
-                                current_turn_index = (current_turn_index + 1) % len(client_names)
-                            else:
-                                current_turn_index = 0
+                            current_turn_index = current_turn_index % (len(client_names) - 1) if len(client_names) > 1 else 0
                     
-                    # Se houverem jogadores restantes, defina a vez do próximo jogador
-                    if clients:
-                        next_player = list(clients.keys())[current_turn_index]
-                        next_player.sendall("Sua rodada. Jogue\n".encode())
-                        broadcast(f'Rodada de usuário {clients[next_player]}', next_player)
-                return
-            
+                    next_player = list(clients.keys())[current_turn_index]
+                    next_player.sendall("Sua rodada. Jogue\n".encode())
+                    broadcast(f'Rodada de usuário {clients[next_player]}', next_player)
+                return  # Interrompe o loop e encerra o processo do cliente
+                
             if message_decoded.upper().startswith("POST"):
                 if clients[client_socket] == list(clients.values())[current_turn_index]:
                     try:
@@ -158,13 +117,9 @@ def handle_client(client_socket, client_address, user_name):
                 else:
                     client_socket.sendall("Não é sua vez! Aguarde sua rodada.\n".encode())
             
-            elif message_decoded.upper().startswith("GET LIST"):
-                if got_list_request:
-                    player_list = "\n".join(list(clients.values()))
-                    client_socket.sendall(f"Lista de jogadores:\n{player_list}\n".encode())
-                else:
-                    client_socket.sendall("Você precisa pedir a lista primeiro com o comando 'get list'.\n".encode())
-                    got_list_request = True
+            elif message_decoded.upper().startswith("GET"):
+                player_list = "\n".join(list(clients.values()))
+                client_socket.sendall(f"Lista de jogadores:\n{player_list}\n".encode())
             
         except ConnectionResetError:
             print(f'Conexão encerrada por {client_address} ({user_name})')
