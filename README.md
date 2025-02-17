@@ -12,8 +12,10 @@ Jogadores podem sair a qualquer momento, sem que interfira na ordem de jogadas.
 
 ## Como Rodar
 
-Requisitos: Python 3 instalado na máquina
+### Requisitos: 
+Python 3 instalado na máquina
 
+### Instruções: 
 Clone ou baixe o repositório. De preferência, clone o repositóriocom o seguinte comando:
 ```
 git clone https://github.com/nathangarciaf/MultiplayerGameServer
@@ -26,11 +28,11 @@ python game.py
 
 Porém caso esteja usando Linux, pode ser que tenha que executar o comando:
 ```
-python game.py
+python3 game.py
 ```
 para executar o servidor.
 
-
+### Como testar 
 Para testar, abra um terminal para cada jogador e conecte-se usando Telnet:
 ```
 telnet 127.0.0.1 65432
@@ -56,3 +58,11 @@ Select: Utilizado para monitorar conexões ativas e tratar comunicação eficien
 Gerenciamento de turnos: Mantemos uma lista de jogadores para garantir a ordem correta dos turnos.
 
 Recuperação de saída de jogadores: Se um jogador sai, o turno passa para o próximo automaticamente.
+
+## Possíveis Melhorias
+
+Interface Web: focando na melhora do quesito visual do jogo, facilitando a vizualização das adivinhações
+e também dos jogadores que estão jogando o jogo.
+
+Correção de pequenos bugs: Tive alguns problemas em questões envolvendo sair no meio do jogo fora da rodada,
+e também problema com retornos ao servidor após sair do jogo uma vez
